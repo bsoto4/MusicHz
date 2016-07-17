@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,13 +32,14 @@ public class MainActivity extends AppCompatActivity {
             items[i] = musicFiles.get(i).getName().toString().replace(".mp3", "").replace(".vav", "").toLowerCase();
         }
 
-        adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.item_music, R.id.tv_music, items);
+        adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_music, R.id.tv_music, items);
         listPlayer.setAdapter(adapter);
 
         listPlayer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(getApplicationContext(), PlayerActivity.class).putExtra("POSITION", position).putExtra("MUSICFILES", musicFiles));
+                Toast.makeText(getBaseContext(), "TOUCH", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), PlayerActivity.class).putExtra("POS", position).putExtra("MF", musicFiles));
             }
         });
     }

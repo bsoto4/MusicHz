@@ -14,12 +14,12 @@
         android:text="Music Name"
         android:textColor="@color/black" />
 
-    <ImageView
+<!--    <ImageView
         android:id="@+id/ic_play"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:src="@drawable/ic_play" />
-
+-->
 </LinearLayout>

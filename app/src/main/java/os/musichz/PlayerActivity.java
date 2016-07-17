@@ -83,10 +83,10 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
         try {
             intent = getIntent();
             bundle = intent.getExtras();
-            musicFiles = (ArrayList) bundle.getParcelableArrayList("MUSICFILES");
-            position = bundle.getInt("POSITION", 0);
+            musicFiles = (ArrayList) bundle.getParcelableArrayList("MF");
+            position = bundle.getInt("POS", 0);
             uri = Uri.parse(musicFiles.get(position).toString());
-            tvMusic.setText(musicFiles.get(position).getName().toString());
+            tvMusic.setText(musicFiles.get(position).getName().toString().replace(".mp3","").replace(".vav",""));
             mediaPlayer = MediaPlayer.create(getApplication(), uri);
             sbRunMusic.start();
             mediaPlayer.start();
@@ -158,7 +158,7 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             position = position - 1;
         }
-        tvMusic.setText(musicFiles.get(position).getName().toString());
+        tvMusic.setText(musicFiles.get(position).getName().toString().replace(".mp3","").replace(".vav",""));
         uri = Uri.parse(musicFiles.get(position).toString());
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
         mediaPlayer.start();
@@ -169,7 +169,7 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
     private void netxMusic() {
         mediaPlayer.stop();
         position = (position + 1) % musicFiles.size();
-        tvMusic.setText(musicFiles.get(position).getName().toString());
+        tvMusic.setText(musicFiles.get(position).getName().toString().replace(".mp3","").replace(".vav",""));
         uri = Uri.parse(musicFiles.get(position).toString());
         mediaPlayer = MediaPlayer.create(getApplication(), uri);
         mediaPlayer.start();
@@ -180,10 +180,10 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
 
     private void playPause() {
         if (mediaPlayer.isPlaying()) {
-            btnPlayPause.setImageResource(R.drawable.ic_pause);
+            btnPlayPause.setImageResource(R.drawable.ic_play_white);
             mediaPlayer.pause();
         } else {
-            btnPlayPause.setImageResource(R.drawable.ic_play_white);
+            btnPlayPause.setImageResource(R.drawable.ic_pause);
             mediaPlayer.start();
         }
     }
