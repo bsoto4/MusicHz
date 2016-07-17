@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         listPlayer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(getApplicationContext(), Player.class).putExtra("POSITION", position).putExtra("MUSICFILES", musicFiles));
+                startActivity(new Intent(getApplicationContext(), PlayerActivity.class).putExtra("POSITION", position).putExtra("MUSICFILES", musicFiles));
             }
         });
     }

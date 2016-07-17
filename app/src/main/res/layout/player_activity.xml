@@ -8,7 +8,7 @@
         android:id="@+id/img_album"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_weight="5"
         android:scaleType="fitXY"
         android:src="@drawable/albumtest" />
 
@@ -17,53 +17,108 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/black"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/black"
-            android:margin="5dp"
-            android:src="@drawable/ic_back" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btn_rewind"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/black"
-            android:padding="5dp"
-            android:src="@drawable/ic_rewind" />
+            <TextView
+                android:id="@+id/tv_music"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:text="Music Name"
+                android:textColor="@color/white" />
 
-        <ImageButton
-            android:id="@+id/btn_play_pause"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/black"
-            android:margin="5dp"
-            android:src="@drawable/ic_pause" />
+            <ImageButton
+                android:id="@+id/btn_playlist"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/black"
+                android:src="@drawable/ic_playlist" />
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/btn_forward"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/black"
-            android:padding="5dp"
-            android:src="@drawable/ic_forward" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/black">
 
-        <ImageButton
-            android:id="@+id/btn_next"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
+            <SeekBar
+                android:id="@+id/sb_music"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:layout_above="@id/ic_play"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="4:30"
+                android:gravity="center"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/black"
-            android:padding="5dp"
-            android:src="@drawable/ic_next" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                android:margin="5dp"
+                android:src="@drawable/ic_back" />
+
+            <ImageButton
+                android:id="@+id/btn_rewind"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                android:padding="5dp"
+                android:src="@drawable/ic_rewind" />
+
+            <ImageButton
+                android:id="@+id/btn_play_pause"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                android:margin="5dp"
+                android:src="@drawable/ic_pause" />
+
+            <ImageButton
+                android:id="@+id/btn_forward"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                android:padding="5dp"
+                android:src="@drawable/ic_forward" />
+
+            <ImageButton
+                android:id="@+id/btn_next"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                android:padding="5dp"
+                android:src="@drawable/ic_next" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
