@@ -28,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
             items[i] = musicFiles.get(i).getName().toString().replace(".mp3", "").replace(".vav", "").toLowerCase();
         }
 
-        adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_music, R.id.tv_music, items);
+        adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.item_music, R.id.tv_music, items);
         listPlayer.setAdapter(adapter);
     }
 
     private ArrayList<File> findAllMusic(File root){
         File[] allFiles = root.listFiles();
-        ArrayList<File> musicFiles = new ArrayList<File>();
+        ArrayList<File> musicFiles = new ArrayList<>();
         for (File file : allFiles){
             if(file.isDirectory() && !file.isHidden()){
                 musicFiles.addAll(findAllMusic(file));
