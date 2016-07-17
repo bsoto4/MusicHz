@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         listPlayer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "TOUCH", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), PlayerActivity.class).putExtra("POS", position).putExtra("MF", musicFiles));
+                finish();
             }
         });
     }
