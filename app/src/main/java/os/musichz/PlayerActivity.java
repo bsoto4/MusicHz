@@ -184,7 +184,7 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-        if(mediaPlayer!=null){
+        if (mediaPlayer != null) {
             sbRunMusic.interrupt();
         }
     }
