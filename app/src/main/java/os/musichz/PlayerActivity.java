@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -29,7 +30,7 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
     private Bundle bundle;
     private int position;
     private Uri uri;
-    private String aux = "";
+    private final String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,26 +59,22 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
                 int duration = mediaPlayer.getDuration();
                 sbMusic.setMax(duration);
                 int actualPosition = 0;
-                int actionPosition = 0;
-
-                boolean status = false;
 
                 while (actualPosition < duration) {
                     try {
                         sleep(500);
                         actualPosition = mediaPlayer.getCurrentPosition();
                         sbMusic.setProgress(actualPosition);
-                        tvTime.setText(getTime(actionPosition));
-
+                        tvTime.setText(getTime(actualPosition));
                     } catch (Exception e) {
-                        tvTime.setText("--:--");
+                        Log.e(TAG, e.toString());
                     }
                 }
             }
         };
 
         if (mediaPlayer != null) {
-            sbRunMusic.stop();
+            sbRunMusic.interrupt();
         }
 
         try {
@@ -86,13 +83,13 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
             musicFiles = (ArrayList) bundle.getParcelableArrayList("MF");
             position = bundle.getInt("POS", 0);
             uri = Uri.parse(musicFiles.get(position).toString());
-            tvMusic.setText(musicFiles.get(position).getName().toString().replace(".mp3","").replace(".vav",""));
+            tvMusic.setText(musicFiles.get(position).getName().toString().replace(".mp3", "").replace(".vav", ""));
             mediaPlayer = MediaPlayer.create(getApplication(), uri);
             sbRunMusic.start();
             mediaPlayer.start();
-            changeVolumen();
+            //changeVolumen();
         } catch (Exception e) {
-
+            Log.e(TAG, e.toString());
         }
 
         sbMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -113,14 +110,10 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    private void changeVolumen() {
-
-    }
-
     private String getTime(int milliseconds) {
-        int seconds = (int) (milliseconds / 1000) % 60;
-        int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
-        int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
+        int seconds = (milliseconds / 1000) % 60;
+        int minutes = ((milliseconds / (1000 * 60)) % 60);
+        int hours = ((milliseconds / (1000 * 60 * 60)) % 24);
         return ((hours < 10) ? "0" + hours : hours) + ":" +
                 ((minutes < 10) ? "0" + minutes : minutes) + ":" +
                 ((seconds < 10) ? "0" + seconds : seconds);
@@ -134,13 +127,13 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
                 previusMusic();
                 break;
             case R.id.btn_rewind:
-                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()-5000);
+                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 5000);
                 break;
             case R.id.btn_play_pause:
                 playPause();
                 break;
             case R.id.btn_forward:
-                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()+5000);
+                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 5000);
                 break;
             case R.id.btn_next:
                 netxMusic();
@@ -158,7 +151,7 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             position = position - 1;
         }
-        tvMusic.setText(musicFiles.get(position).getName().toString().replace(".mp3","").replace(".vav",""));
+        tvMusic.setText(musicFiles.get(position).getName().toString().replace(".mp3", "").replace(".vav", ""));
         uri = Uri.parse(musicFiles.get(position).toString());
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
         mediaPlayer.start();
@@ -169,7 +162,7 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
     private void netxMusic() {
         mediaPlayer.stop();
         position = (position + 1) % musicFiles.size();
-        tvMusic.setText(musicFiles.get(position).getName().toString().replace(".mp3","").replace(".vav",""));
+        tvMusic.setText(musicFiles.get(position).getName().toString().replace(".mp3", "").replace(".vav", ""));
         uri = Uri.parse(musicFiles.get(position).toString());
         mediaPlayer = MediaPlayer.create(getApplication(), uri);
         mediaPlayer.start();
@@ -185,6 +178,14 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             btnPlayPause.setImageResource(R.drawable.ic_pause);
             mediaPlayer.start();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mediaPlayer != null) {
+            sbRunMusic.interrupt();
         }
     }
 }

@@ -9,9 +9,9 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_weight="6"
+        android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:padding="10dp"
-        android:background="@color/colorPrimary"
         android:text="Music Name"
         android:textColor="@color/white" />
 
